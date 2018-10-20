@@ -7,7 +7,13 @@ public class lab2Meth {
 		Answer ans = new Answer(x,y);
 		
 		lab2Common.findAB(ans);
-		lab2Common.findSPE(ans);		
+		
+		for (int i=0; i<ans.size; i++) 
+		{
+			ans.e[i]=((ans.x[i]*ans.a+ans.b)-ans.y[i]);
+			ans.p[i]=ans.e[i]/ans.y[i];
+			ans.S=ans.S+ans.e[i]*ans.e[i];
+		}		
 		
 		ans.r = lab2Common.countR(x,y);
 		
@@ -15,12 +21,13 @@ public class lab2Meth {
 		return ans;		
 	}
 	
-	static double Quadra(double x[], double y[]) {
+	static Answer Quadra(double x[], double y[]) {
+		
+		Answer ans = new Answer(x,y);
 		
 		double SX=0,SXX=0,SXXX=0,SXXXX=0,SY=0,SXY=0,SXXY=0;
-		int size = x.length;
 		
-		for (int i=0;i<size;i++)
+		for (int i=0;i<ans.size;i++)
 		{
 			SX=SX+x[i];
 			SY=SY+y[i];
@@ -32,38 +39,24 @@ public class lab2Meth {
 		}
 		
 		
-		double[][] equat = {{size, SX, SXX, SY}, {SX, SXX, SXXX, SXY}, {SXX, SXXX, SXXXX, SXXY}};
-		/*
-		for (int i=0;i<4;i++) {
-			equat[1][i]=equat[1][i]-equat[0][i]*(equat[1][0]/equat[0][0]);
-			equat[2][i]=equat[2][i]-equat[0][i]*(equat[2][0]/equat[0][0]);
-			equat[2][i]=equat[2][i]-equat[1][i]*(equat[2][1]/equat[1][1]);
-		}
-		
-		double a2=equat[2][3]/equat[2][2];
-		double a1=(equat[1][3]-(a2*equat[1][2]))/equat[1][1];
-		double a0=(equat[0][3]-(a2*equat[0][2])-(a1*equat[0][1]))/equat[0][0];
-		*/
+		double[][] equat = {{ans.size, SX, SXX, SY}, {SX, SXX, SXXX, SXY}, {SXX, SXXX, SXXXX, SXXY}};
 		
 		GaussMatrix gm = new GaussMatrix(equat);
 		gm = gm.triangleMatrix();
 		double[] roots = gm.roots();
+		ans.a=roots[2]; ans.b=roots[1]; ans.c=roots[0];
 		
-		
-		double S=0;
-		double[] p = new double[size], e = new double[size]; 
-		
-		for (int i=0; i<size; i++) 
+		for (int i=0; i<ans.size; i++) 
 		{
-			e[i]=(x[i]*x[i]*roots[2]+x[i]*roots[1]+roots[0]-y[i]);
-			p[i]=e[i]/y[i];
-			S=S+e[i]*e[i];
+			ans.e[i]=(x[i]*x[i]*ans.a+x[i]*ans.b+ans.c-ans.y[i]);
+			ans.p[i]=ans.e[i]/ans.y[i];
+			ans.S=ans.S+ans.e[i]*ans.e[i];
 		}
 		
-		double r = lab2Common.countR(x,y);
+		ans.r = lab2Common.countR(ans.x,ans.y);
 		
-		double q = Math.sqrt(S/size);
-		return q;		
+		ans.q = Math.sqrt(ans.S/ans.size);
+		return ans;		
 	}
 	
 	static Answer Power (double x[], double y[]) 

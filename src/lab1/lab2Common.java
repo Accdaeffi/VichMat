@@ -40,15 +40,5 @@ public class lab2Common {
 		ans.a = (SXY*ans.size-SX*SY)/(SXX*ans.size-SX*SX);
 		ans.b = (SXX*SY-SX*SXY)/(SXX*ans.size-SX*SX);
 		ans.c=0;
-	}
-	
-	static void findSPE (Answer ans) {
-		for (int i=0; i<ans.size; i++) 
-		{
-			ans.e[i]=((ans.x[i]*ans.a+ans.b)-ans.y[i]);
-			ans.p[i]=ans.e[i]/ans.y[i];
-			ans.S=ans.S+ans.e[i]*ans.e[i];
-		}
-	}
-	
+	}	
 }
