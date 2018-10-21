@@ -1,4 +1,4 @@
-package lab1;
+package lab2;
 
 //Автор данного класса - shilko2013. (https://github.com/shilko2013)
 

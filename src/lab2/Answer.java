@@ -1,4 +1,4 @@
-package lab1;
+package lab2;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,14 +34,16 @@ public class Answer {
 	
 	public void write(String source) {
 		if (source.equals("Console")) {
-			System.out.println("Параметры функции (a,b,c):"+a+" "+b+" "+c);
-			System.out.println("Мера отклонения:"+S);
-			System.out.println("Среднеквадратическое отклонение:"+q);}
+			System.out.println("Оптимальная функция: "+desc);
+			System.out.println("Параметры функции (a,b,c): "+a+" "+b+" "+c);
+			System.out.println("Мера отклонения: "+S);
+			System.out.println("Среднеквадратическое отклонение: "+q);}
 			else { 
 				try (FileWriter writer = new FileWriter(source);) {
-					writer.write("Параметры функции (a,b,c):"+new Double(a).toString()+" "+new Double(b).toString()+" "+new Double(c).toString()+"\n");
-					writer.write("Мера отклонения:"+new Double(S).toString()+"\n");
-					writer.write("Среднеквадратическое отклонение:"+new Double(q).toString()+"\n");
+					writer.write("Оптимальная функция: "+desc);
+					writer.write("Параметры функции (a,b,c): "+new Double(a).toString()+" "+new Double(b).toString()+" "+new Double(c).toString()+"\n");
+					writer.write("Мера отклонения: "+new Double(S).toString()+"\n");
+					writer.write("Среднеквадратическое отклонение: "+new Double(q).toString()+"\n");
 				} catch (IOException e) {
 					System.out.println("Проблема с записью в файл!");;
 				}

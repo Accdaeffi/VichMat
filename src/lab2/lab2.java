@@ -1,4 +1,4 @@
-package lab1;
+package lab2;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,6 +13,7 @@ public class lab2 {
 		
 		
 		Scanner sc = new Scanner(System.in);
+		Scanner bu = sc;
 		String s, source;
 		System.out.println("Откуда информацию брать будем: Console или File?");
 		s = sc.nextLine();
@@ -53,16 +54,13 @@ public class lab2 {
 			}
 		}
 		catch (NumberFormatException err) {
-			System.out.println("Кривые данные!"); System.exit(0);}
-		
-		
+			System.out.println("Кривые данные!"); System.exit(0);}	
 		
 		/*
-		1.1 2.3 3.7 4.5 5.4 6.8 7.5         	
-		2.73 5.12 7.74 8.91 10.59 12.75 13.43
+		14
+		0.1 0.3 0.6 0.9 1.2 1.5 1.8 2.1 2.4 2.7 3 3.3 3.6 3.9         	
+		0.23 0.64 1.32 1.87 2.45 3.11 3.95 4.67 5.13 5.79 6.45 7.32 7.84 8.55
 		*/
-		
-		
 		
 		Answer qLin = lab2Meth.Lineal(x, y); qLin.desc="y=ax+b";
 		Answer qQua = lab2Meth.Quadra(x, y); qQua.desc="y=ax^2+bx+c";
@@ -76,12 +74,13 @@ public class lab2 {
 		if (best.q>qExp.q) best=qExp;
 		if (best.q>qLog.q) best=qLog;
 		
+		sc = bu;
 		System.out.println("А куда выводить: Console или File?");
-		s = sc.nextLine();
+		s = bu.nextLine();
 		source = s.trim();
 		if (source.equals("File")) {
 			System.out.println("Введите название файла (с форматом).");
-			s = sc.nextLine();
+			s = bu.nextLine();
 			source = s.trim();
 		} else if (!source.equals("Console")) {System.out.println("Неизвестный источник!"); System.exit(0);} 
 		
